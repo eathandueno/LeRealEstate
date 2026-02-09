@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #faf9f7;
+  --color-foreground: #1a2332;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand palette */
+  --color-navy-50: #f0f3f8;
+  --color-navy-100: #dce3ef;
+  --color-navy-200: #b8c7df;
+  --color-navy-300: #8da5c9;
+  --color-navy-400: #6683b3;
+  --color-navy-500: #3d5a8a;
+  --color-navy-600: #2d4570;
+  --color-navy-700: #1e3a5f;
+  --color-navy-800: #162b47;
+  --color-navy-900: #0f1d30;
+
+  --color-gold-50: #fdf8ef;
+  --color-gold-100: #f9edda;
+  --color-gold-200: #f2d9b0;
+  --color-gold-300: #e8c07e;
+  --color-gold-400: #d4a55a;
+  --color-gold-500: #c9a96e;
+  --color-gold-600: #b08c4a;
+  --color-gold-700: #8f7038;
+  --color-gold-800: #6e5629;
+  --color-gold-900: #4d3c1c;
+
+  --color-warm-50: #fdfcfa;
+  --color-warm-100: #f7f5f0;
+  --color-warm-200: #ede9e0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-warm-50);
+  color: var(--color-foreground);
+}
+
+/* Pad bottom on mobile for sticky CTA */
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 4.5rem;
+  }
 }

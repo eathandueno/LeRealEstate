@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Le Group Realty — Marketing Website
+
+A production-ready marketing website for **Le Group Realty**, associated with **208 Real Estate**, built to generate qualified leads in the Boise & Treasure Valley market.
+
+## Tech Stack
+
+- **Next.js 16** (App Router) + React 19 + TypeScript
+- **Tailwind CSS 4**
+- **Supabase** for lead storage
+- **Zod** for form validation
+- **React Hook Form** for form management
+- **Lucide React** for icons
+- Vercel-ready deployment
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure environment variables
+
+Copy the example env file and fill in your values:
+
+```bash
+cp .env.example .env.local
+```
+
+Required variables:
+
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous/public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server-only) |
+| `NEXT_PUBLIC_SITE_URL` | Your site URL (e.g., `https://legrouprealty.com`) |
+
+> **Note:** The site will run without Supabase configured — form submissions will log to the console instead.
+
+### 3. Create the Supabase table
+
+In your Supabase project, go to **SQL Editor** and run the contents of:
+
+```
+supabase/migration.sql
+```
+
+This creates the `leads` table with proper Row Level Security policies.
+
+### 4. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 5. Build for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Deploying to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Push your repo to GitHub.
+2. Import the project in [Vercel](https://vercel.com/new).
+3. Add your environment variables in Vercel's project settings.
+4. Deploy — Vercel auto-detects Next.js.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── api/leads/route.ts    # Lead submission API endpoint
+│   ├── about/page.tsx
+│   ├── contact/page.tsx
+│   ├── listings/page.tsx
+│   ├── privacy/page.tsx
+│   ├── services/page.tsx
+│   ├── success/page.tsx
+│   ├── layout.tsx            # Root layout (navbar + footer)
+│   ├── page.tsx              # Home page
+│   ├── globals.css
+│   ├── sitemap.ts
+│   └── robots.ts
+├── components/
+│   ├── FAQ.tsx
+│   ├── Footer.tsx
+│   ├── Hero.tsx
+│   ├── LeadForm.tsx
+│   ├── ListingCard.tsx
+│   ├── Navbar.tsx
+│   ├── ServicesGrid.tsx
+│   ├── StickyCTA.tsx
+│   └── Testimonials.tsx
+├── data/
+│   ├── faqs.ts
+│   ├── listings.ts           # Mock listing data (replace with MLS feed)
+│   └── testimonials.ts
+└── lib/
+    ├── rate-limit.ts
+    ├── schemas.ts             # Zod validation schemas
+    ├── seo.ts                 # SEO metadata helper
+    ├── supabase-client.ts     # Client-side Supabase
+    └── supabase-server.ts     # Server-side Supabase (service role)
+supabase/
+└── migration.sql              # SQL to create leads table
+```
 
-## Deploy on Vercel
+## Lead Capture
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Forms on `/` (compact) and `/contact` (full)
+- Validated with Zod (fullName, phone required; email recommended)
+- Honeypot field for spam protection
+- In-memory rate limiting (5 requests/minute per IP)
+- Saves to Supabase `leads` table (or logs to console if not configured)
+- Email notification placeholder (integrate Resend, SendGrid, etc.)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format with Prettier |
