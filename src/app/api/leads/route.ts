@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { leadSchema } from '@/lib/schemas';
-import { supabaseAdmin } from '@/lib/supabase-server';
 import { checkRateLimit } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
@@ -41,29 +40,44 @@ export async function POST(request: NextRequest) {
     (body as Record<string, unknown>).sourcePath?.toString() ?? '/';
   const userAgent = request.headers.get('user-agent') ?? '';
 
-  // Attempt Supabase insert
+  // Attempt Supabase insert only if configured
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
-  if (supabaseUrl && supabaseUrl !== 'https://your-project.supabase.co') {
-    const { error: dbError } = await supabaseAdmin.from('leads').insert({
-      full_name: data.fullName,
-      phone: data.phone,
-      email: data.email ?? null,
-      interested_in: data.interestedIn,
-      message: data.message ?? null,
-      preferred_contact_method: data.preferredContactMethod,
-      source_path: sourcePath,
-      user_agent: userAgent,
-    });
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? '';
+  const isSupabaseConfigured =
+    supabaseUrl &&
+    supabaseKey &&
+    supabaseUrl !== 'https://your-project.supabase.co' &&
+    supabaseKey !== 'your-service-role-key';
 
-    if (dbError) {
-      console.error('[leads] Supabase insert error:', dbError);
-      return NextResponse.json(
-        { error: 'Failed to save your information. Please try again.' },
-        { status: 500 },
-      );
+  if (isSupabaseConfigured) {
+    try {
+      const { createClient } = await import('@supabase/supabase-js');
+      const supabaseAdmin = createClient(supabaseUrl, supabaseKey);
+
+      const { error: dbError } = await supabaseAdmin.from('leads').insert({
+        full_name: data.fullName,
+        phone: data.phone,
+        email: data.email ?? null,
+        interested_in: data.interestedIn,
+        message: data.message ?? null,
+        preferred_contact_method: data.preferredContactMethod,
+        source_path: sourcePath,
+        user_agent: userAgent,
+      });
+
+      if (dbError) {
+        console.error('[leads] Supabase insert error:', dbError);
+        return NextResponse.json(
+          { error: 'Failed to save your information. Please try again.' },
+          { status: 500 },
+        );
+      }
+    } catch (err) {
+      console.error('[leads] Supabase unavailable:', err);
+      // Fall through to console log
     }
   } else {
-    // Supabase not configured — log to console
+    // Supabase not configured — log to console so leads aren't lost
     console.log('[leads] New lead (Supabase not configured):', {
       ...data,
       sourcePath,
