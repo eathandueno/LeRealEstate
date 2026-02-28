@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Page header */}
-      <section className="bg-gradient-to-br from-navy-800 to-navy-700 py-16 sm:py-20">
+      <section className="bg-gradient-to-br from-black to-neutral-900 py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <p className="text-sm font-semibold uppercase tracking-widest text-gold-400">About</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -24,7 +24,7 @@ export default function AboutPage() {
       </section>
 
       {/* Meet the Realtor */}
-      <section className="bg-warm-50 py-16 sm:py-20">
+      <section className="bg-neutral-950 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-10 sm:flex-row sm:items-start">
             {/* Headshot */}
@@ -42,18 +42,17 @@ export default function AboutPage() {
 
             {/* Bio */}
             <div className="text-center sm:text-left">
-              <p className="text-sm font-semibold uppercase tracking-widest text-gold-600">
+              <p className="text-sm font-semibold uppercase tracking-widest text-gold-400">
                 Meet Your Realtor
               </p>
-              <h2 className="mt-2 text-2xl font-bold text-navy-800 sm:text-3xl">
-                {/* Replace with realtor's actual name */}
+              <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
                 Jackson Le
               </h2>
-              <p className="mt-1 text-sm font-medium text-navy-400">
+              <p className="mt-1 text-sm font-medium text-gray-500">
                 Licensed Real Estate Agent &middot; Le Group Realty
               </p>
 
-              <div className="mt-4 space-y-4 text-base leading-relaxed text-navy-500">
+              <div className="mt-4 space-y-4 text-base leading-relaxed text-gray-400">
                 <p>
                   Born and raised in the Treasure Valley, I know this area inside and out. I got
                   into real estate because I believe everyone deserves a trusted advocate when
@@ -74,13 +73,13 @@ export default function AboutPage() {
               <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
                 <Link
                   href="/contact"
-                  className="inline-flex rounded-lg bg-gold-500 px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-sm transition-all hover:bg-gold-400 hover:shadow-md"
+                  className="inline-flex rounded-lg bg-gold-500 px-5 py-2.5 text-sm font-semibold text-black shadow-sm transition-all hover:bg-gold-400 hover:shadow-md"
                 >
                   Get in Touch
                 </Link>
                 <a
                   href="tel:+12082848573"
-                  className="inline-flex rounded-lg border border-navy-200 bg-white px-5 py-2.5 text-sm font-medium text-navy-700 shadow-sm transition-all hover:border-navy-300 hover:shadow-md"
+                  className="inline-flex rounded-lg border border-neutral-700 bg-neutral-900 px-5 py-2.5 text-sm font-medium text-gray-300 shadow-sm transition-all hover:border-neutral-600 hover:shadow-md"
                 >
                   (208) 284-8573
                 </a>
@@ -93,14 +92,14 @@ export default function AboutPage() {
       {/* About the company */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold-600">
+          <p className="text-sm font-semibold uppercase tracking-widest text-gold-400">
             The Team
           </p>
-          <h2 className="mt-2 text-2xl font-bold text-navy-800 sm:text-3xl">
+          <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">
             About the Company
           </h2>
 
-          <div className="mt-6 space-y-6 text-base leading-relaxed text-navy-500">
+          <div className="mt-6 space-y-6 text-base leading-relaxed text-gray-400">
             <p>
               Le Group Realty was founded with a simple belief: real estate should be personal.
               Whether you&apos;re a first-time buyer navigating the Boise market, a family looking
@@ -123,12 +122,12 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-warm-100 py-16 sm:py-20">
+      <section className="bg-neutral-950 py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold-600">
+          <p className="text-sm font-semibold uppercase tracking-widest text-gold-400">
             What We Stand For
           </p>
-          <h2 className="mt-2 text-2xl font-bold text-navy-800 sm:text-3xl">Our Values</h2>
+          <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Our Values</h2>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             {[
@@ -151,13 +150,13 @@ export default function AboutPage() {
             ].map((v) => (
               <div
                 key={v.label}
-                className="rounded-xl border border-warm-200 bg-white p-5 shadow-sm"
+                className="rounded-xl border border-neutral-800 bg-neutral-900 p-5 shadow-sm"
               >
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-gold-500" />
-                  <h3 className="text-lg font-semibold text-navy-800">{v.label}</h3>
+                  <h3 className="text-lg font-semibold text-white">{v.label}</h3>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-navy-500">{v.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-gray-400">{v.desc}</p>
               </div>
             ))}
           </div>
@@ -165,15 +164,15 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-navy-800 py-16 text-center sm:py-20">
+      <section className="bg-black py-16 text-center sm:py-20">
         <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-white">Ready to Work Together?</h2>
-          <p className="mt-4 text-navy-200">
+          <p className="mt-4 text-gray-400">
             Reach out today and let&apos;s start a conversation about your real estate goals.
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex rounded-lg bg-gold-500 px-6 py-3 text-sm font-semibold text-navy-900 shadow-sm transition-all hover:bg-gold-400 hover:shadow-md"
+            className="mt-6 inline-flex rounded-lg bg-gold-500 px-6 py-3 text-sm font-semibold text-black shadow-sm transition-all hover:bg-gold-400 hover:shadow-md"
           >
             Contact Me
           </Link>

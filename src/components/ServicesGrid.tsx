@@ -29,16 +29,16 @@ const services = [
 
 export default function ServicesGrid() {
   return (
-    <section className="bg-warm-50 py-16 sm:py-20">
+    <section className="bg-black py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-gold-600">
+          <p className="text-sm font-semibold uppercase tracking-widest text-gold-400">
             What We Do
           </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-navy-800 sm:text-4xl">
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             How We Can Help
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-navy-400">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
             Full-service real estate support tailored to your goals.
           </p>
         </div>
@@ -47,13 +47,13 @@ export default function ServicesGrid() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="group rounded-xl border border-warm-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+              className="group rounded-xl border border-neutral-800 bg-neutral-900 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-gold-500/5"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-navy-700 to-navy-800 text-gold-400 shadow-md transition-transform group-hover:scale-110">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400 shadow-md transition-transform group-hover:scale-110">
                 <service.icon className="h-6 w-6" />
               </div>
-              <h3 className="mt-4 text-lg font-semibold text-navy-800">{service.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-navy-400">{service.description}</p>
+              <h3 className="mt-4 text-lg font-semibold text-white">{service.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-400">{service.description}</p>
             </div>
           ))}
         </div>
